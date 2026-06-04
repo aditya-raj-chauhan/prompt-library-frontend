@@ -8,6 +8,9 @@ import {
 import ProtectedRoute
     from "../components/common/ProtectedRoute";
 
+import Landing
+    from "../pages/Landing";
+
 import Login
     from "../pages/auth/Login";
 
@@ -40,6 +43,13 @@ const AppRoutes = () => {
 
             <Routes>
 
+                {/* Landing */}
+
+                <Route
+                    path="/"
+                    element={<Landing />}
+                />
+
                 {/* Auth */}
 
                 <Route
@@ -55,7 +65,7 @@ const AppRoutes = () => {
                 {/* Dashboard */}
 
                 <Route
-                    path="/"
+                    path="/explore"
                     element={
                         <ProtectedRoute>
                             <Explore />
@@ -123,7 +133,6 @@ const AppRoutes = () => {
             </Routes>
 
         </BrowserRouter>
-
     );
 };
 
