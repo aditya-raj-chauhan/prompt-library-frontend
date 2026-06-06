@@ -1,56 +1,76 @@
+import React from "react";
 import { Inbox } from "lucide-react";
+import { motion } from "framer-motion";
 
 const EmptyState = ({
     title = "Nothing Here Yet",
     description = "No data available.",
 }) => {
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="
                 flex
                 flex-col
                 items-center
                 justify-center
-                py-20
+                py-24
+                px-4
                 text-center
+                w-full
             "
         >
+            {/* Icon Container */}
             <div
                 className="
-                    p-5
+                    w-20
+                    h-20
+                    flex
+                    items-center
+                    justify-center
                     rounded-full
-                    bg-[#2E2E31]
-                    mb-4
-                    shadow-md
+                    bg-white/[0.02]
+                    border
+                    border-white/10
+                    mb-6
+                    shadow-inner
                 "
             >
                 <Inbox
-                    size={48}
-                    className="text-[#BEB8AF]"
+                    size={32}
+                    strokeWidth={1.5}
+                    className="text-white/40"
                 />
             </div>
 
+            {/* Title */}
             <h2
                 className="
                     text-2xl
-                    font-semibold
-                    text-[#0B0B0C]
+                    font-bold
+                    text-white
+                    tracking-tight
                     mb-2
                 "
             >
                 {title}
             </h2>
 
+            {/* Description */}
             <p
                 className="
-                    text-[#2E2E31]
-                    max-w-md
-                    opacity-80
+                    text-white/50
+                    max-w-sm
+                    text-sm
+                    md:text-base
+                    leading-relaxed
                 "
             >
                 {description}
             </p>
-        </div>
+        </motion.div>
     );
 };
 

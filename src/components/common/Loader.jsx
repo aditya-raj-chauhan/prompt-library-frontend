@@ -1,3 +1,5 @@
+import React from "react";
+
 const Loader = () => {
     return (
         <div
@@ -6,6 +8,7 @@ const Loader = () => {
                 items-center
                 justify-center
                 min-h-[300px]
+                w-full
             "
         >
             <div
@@ -14,8 +17,8 @@ const Loader = () => {
                     w-12
                     rounded-full
                     border-4
-                    border-[#BEB8AF]
-                    border-t-[#2E2E31]
+                    border-white/10
+                    border-t-white/80
                     animate-spin
                 "
             />

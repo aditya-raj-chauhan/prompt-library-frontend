@@ -1,4 +1,6 @@
+import React from "react";
 import DashboardLayout from "../../components/layout/DashboardLayout";
+import { motion } from "framer-motion";
 
 import {
     Bot,
@@ -8,7 +10,6 @@ import {
 } from "lucide-react";
 
 const SupportedModels = () => {
-
     const models = [
         {
             name: "GPT-5",
@@ -54,125 +55,129 @@ const SupportedModels = () => {
         }
     ];
 
+    // Framer motion variants for the staggered grid animation
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    };
+
     return (
         <DashboardLayout>
-
-            <div className="mb-12">
-                <h1
-                    className="
-                        text-5xl
-                        font-bold
-                        text-black
-                    "
-                >
+            <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mb-12"
+            >
+                <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                     Supported Models
                 </h1>
-
-                <p
-                    className="
-                        mt-3
-                        text-gray-500
-                        text-lg
-                    "
-                >
+                <p className="mt-3 text-white/50 text-base md:text-lg">
                     Browse AI models and discover prompts.
                 </p>
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
                 className="
-                    columns-1
-                    md:columns-2
-                    xl:columns-3
+                    grid
+                    grid-cols-1
+                    md:grid-cols-2
+                    lg:grid-cols-3
                     gap-6
                 "
             >
                 {models.map((model) => {
-
                     const Icon = model.icon;
 
                     return (
-                        <div
+                        <motion.div
+                            variants={itemVariants}
                             key={model.name}
                             className="
-                                mb-6
-                                break-inside-avoid
-                                bg-white
+                                group
+                                bg-white/[0.02]
+                                border
+                                border-white/10
                                 rounded-[32px]
                                 overflow-hidden
-                                shadow-sm
-                                hover:shadow-xl
+                                hover:bg-white/[0.04]
+                                hover:border-white/20
                                 transition-all
                                 duration-300
-                                border
-                                border-gray-100
+                                flex
+                                flex-col
                             "
                         >
                             {/* Visual Section */}
-
                             <div
                                 className="
                                     h-56
                                     bg-gradient-to-br
-                                    from-gray-50
-                                    to-gray-100
+                                    from-white/[0.05]
+                                    to-transparent
                                     flex
                                     items-center
                                     justify-center
+                                    border-b
+                                    border-white/5
+                                    group-hover:from-white/[0.08]
+                                    transition-colors
+                                    duration-300
                                 "
                             >
                                 <Icon
                                     size={90}
+                                    strokeWidth={1.5}
                                     className="
-                                        text-black
-                                        opacity-90
+                                        text-white/40
+                                        group-hover:text-white/80
+                                        group-hover:scale-110
+                                        transition-all
+                                        duration-500
                                     "
                                 />
                             </div>
 
-                            {/* Content */}
-
-                            <div className="p-6">
-
+                            {/* Content Section */}
+                            <div className="p-6 flex-1 flex flex-col">
                                 <span
                                     className="
                                         text-xs
                                         uppercase
                                         tracking-widest
-                                        text-gray-500
-                                        font-medium
+                                        text-white/40
+                                        font-semibold
+                                        mb-2
                                     "
                                 >
                                     {model.category}
                                 </span>
 
-                                <h2
-                                    className="
-                                        mt-3
-                                        text-2xl
-                                        font-bold
-                                        text-black
-                                    "
-                                >
+                                <h2 className="text-2xl font-bold text-white">
                                     {model.name}
                                 </h2>
 
-                                <p
-                                    className="
-                                        mt-3
-                                        text-gray-600
-                                        leading-relaxed
-                                    "
-                                >
+                                <p className="mt-3 text-white/50 leading-relaxed text-sm">
                                     {model.description}
                                 </p>
-
                             </div>
-                        </div>
+                        </motion.div>
                     );
                 })}
-            </div>
-
+            </motion.div>
         </DashboardLayout>
     );
 };

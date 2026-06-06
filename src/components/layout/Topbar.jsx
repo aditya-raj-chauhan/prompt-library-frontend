@@ -1,3 +1,4 @@
+import React from "react";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -5,9 +6,7 @@ import SearchBar from "../common/SearchBar";
 import useAuth from "../../hooks/useAuth";
 
 const Topbar = () => {
-
     const navigate = useNavigate();
-
     const { logout } = useAuth();
 
     const handleLogout = () => {
@@ -19,62 +18,58 @@ const Topbar = () => {
         <header
             className="
                 h-20
+                bg-black/100
+                backdrop-blur-xl
                 border-b
-                border-[#BEB8AF]/30
-                bg-[#FFFFFB]
+                border-white/10
                 flex
                 items-center
                 justify-between
                 px-6
+                sticky
+                top-0
+                z-30
             "
         >
             {/* Logo */}
-
-            <div
-                className="
-                    flex
-                    items-center
-                    gap-2
-                "
-            >
-                <h1
-                    className="
-                        text-2xl
-                        font-bold
-                        text-[#2E2E31]
-                    "
-                >
+            <div className="flex items-center shrink-0">
+                <h1 className="text-xl font-bold text-white tracking-tight">
                     PromptLibrary
                 </h1>
             </div>
 
             {/* Search */}
+            <div className="flex-1 max-w-xl mx-8 flex justify-start">
+                <SearchBar />
+            </div>
 
-            <SearchBar />
-
-            {/* Logout */}
-
+            {/* Logout Button */}
             <button
                 onClick={handleLogout}
                 className="
                     flex
                     items-center
                     gap-2
-                    bg-[#2E2E31]
-                    text-[#FFFFFB]
-                    hover:bg-[#0B0B0C]
+                    bg-white/[0.02]
+                    border
+                    border-white/10
+                    text-white/70
+                    hover:bg-red-500/10
+                    hover:text-red-400
+                    hover:border-red-500/20
                     px-4
-                    py-2
+                    py-2.5
                     rounded-xl
                     transition-all
+                    duration-200
                     shadow-sm
+                    text-sm
+                    font-medium
+                    shrink-0
                 "
             >
-                <LogOut size={18} />
-
-                <span>
-                    Logout
-                </span>
+                <LogOut size={16} />
+                <span>Logout</span>
             </button>
         </header>
     );

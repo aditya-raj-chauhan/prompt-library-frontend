@@ -1,108 +1,62 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import UploadForm from "../../components/upload/UploadForm";
 
-import {
-    createUpload
-} from "../../services/uploadService";
+import { createUpload } from "../../services/uploadService";
 
 const CreatePrompt = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
-    const navigate =
-        useNavigate();
-
-    const [loading, setLoading] =
-        useState(false);
-
-    const handleSubmit = async (
-        formData
-    ) => {
-
+    const handleSubmit = async (formData) => {
         try {
-
             setLoading(true);
-
-            const response =
-                await createUpload(
-                    formData
-                );
-
-            toast.success(
-                "Prompt created successfully"
-            );
-
-            navigate(
-                `/upload/${response.id}`
-            );
-
+            const response = await createUpload(formData);
+            toast.success("Prompt created successfully");
+            navigate(`/upload/${response.id}`);
         } catch (error) {
-
             toast.error(
-                error.response?.data?.message ||
-                "Failed to create prompt"
+                error.response?.data?.message || "Failed to create prompt"
             );
-
         } finally {
-
             setLoading(false);
         }
     };
 
     return (
-
         <DashboardLayout>
-
-            <div
-                className="
-                    max-w-5xl
-                    mx-auto
-                "
-            >
-
-                <div
-                    className="
-                        mb-8
-                    "
+            <div className="max-w-5xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="mb-8"
                 >
-
-                    <h1
-                        className="
-                            text-4xl
-                            font-bold
-                            text-[#0B0B0C]
-                        "
-                    >
+                    <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
                         Create Prompt
                     </h1>
 
-                    <p
-                        className="
-                            text-[#2E2E31]
-                            opacity-70
-                            mt-2
-                        "
-                    >
+                    <p className="text-white/50 mt-2 text-sm md:text-base">
                         Share your best prompts with the community.
                     </p>
+                </motion.div>
 
-                </div>
-
-                <UploadForm
-                    onSubmit={
-                        handleSubmit
-                    }
-                    loading={
-                        loading
-                    }
-                />
-
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                >
+                    <UploadForm
+                        onSubmit={handleSubmit}
+                        loading={loading}
+                    />
+                </motion.div>
             </div>
-
         </DashboardLayout>
-
     );
 };
 

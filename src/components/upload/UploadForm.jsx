@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { UploadCloud, Image as ImageIcon, CheckCircle2 } from "lucide-react";
 
 const UploadForm = ({
     onSubmit,
     loading = false
 }) => {
-
     const [formData, setFormData] = useState({
         title: "",
         prompt: "",
@@ -22,7 +22,6 @@ const UploadForm = ({
     };
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
 
         const payload = new FormData();
@@ -52,18 +51,18 @@ const UploadForm = ({
             className="
                 max-w-4xl
                 mx-auto
-                bg-white
+                bg-white/[0.02]
                 border
-                border-gray-200
+                border-white/10
                 rounded-[32px]
-                shadow-sm
+                shadow-2xl
+                backdrop-blur-sm
                 p-8
                 md:p-10
                 space-y-8
             "
         >
             {/* Title */}
-
             <div>
                 <label
                     className="
@@ -71,7 +70,7 @@ const UploadForm = ({
                         mb-3
                         text-sm
                         font-semibold
-                        text-black
+                        text-white/90
                     "
                 >
                     Title
@@ -88,21 +87,24 @@ const UploadForm = ({
                         w-full
                         px-5
                         py-4
-                        bg-gray-50
+                        bg-black/50
                         border
-                        border-gray-200
-                        rounded-[16px]
-                        text-black
-                        placeholder:text-gray-400
+                        border-white/10
+                        rounded-2xl
+                        text-white
+                        placeholder:text-white/30
                         focus:outline-none
-                        focus:border-black
+                        focus:border-white/30
+                        focus:ring-1
+                        focus:ring-white/30
+                        focus:bg-white/[0.02]
                         transition-all
+                        duration-200
                     "
                 />
             </div>
 
             {/* Description */}
-
             <div>
                 <label
                     className="
@@ -110,7 +112,7 @@ const UploadForm = ({
                         mb-3
                         text-sm
                         font-semibold
-                        text-black
+                        text-white/90
                     "
                 >
                     Description
@@ -121,27 +123,32 @@ const UploadForm = ({
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
-                    placeholder="Describe your prompt"
+                    placeholder="Describe your prompt..."
                     required
                     className="
                         w-full
                         px-5
                         py-4
-                        bg-gray-50
+                        bg-black/50
                         border
-                        border-gray-200
-                        rounded-[16px]
-                        text-black
-                        placeholder:text-gray-400
+                        border-white/10
+                        rounded-2xl
+                        text-white
+                        placeholder:text-white/30
                         resize-none
                         focus:outline-none
-                        focus:border-black
+                        focus:border-white/30
+                        focus:ring-1
+                        focus:ring-white/30
+                        focus:bg-white/[0.02]
+                        transition-all
+                        duration-200
+                        custom-scrollbar
                     "
                 />
             </div>
 
             {/* Prompt */}
-
             <div>
                 <label
                     className="
@@ -149,38 +156,46 @@ const UploadForm = ({
                         mb-3
                         text-sm
                         font-semibold
-                        text-black
+                        text-white/90
                     "
                 >
                     Prompt
                 </label>
 
                 <textarea
-                    rows={10}
+                    rows={8}
                     name="prompt"
                     value={formData.prompt}
                     onChange={handleChange}
-                    placeholder="Write your AI prompt here..."
+                    placeholder="Write your exact AI prompt here..."
                     required
                     className="
                         w-full
                         px-5
                         py-4
-                        bg-gray-50
+                        bg-black/50
                         border
-                        border-gray-200
-                        rounded-[16px]
-                        text-black
-                        placeholder:text-gray-400
+                        border-white/10
+                        rounded-2xl
+                        text-white
+                        font-mono
+                        text-sm
+                        placeholder:text-white/30
+                        placeholder:font-sans
                         resize-none
                         focus:outline-none
-                        focus:border-black
+                        focus:border-white/30
+                        focus:ring-1
+                        focus:ring-white/30
+                        focus:bg-white/[0.02]
+                        transition-all
+                        duration-200
+                        custom-scrollbar
                     "
                 />
             </div>
 
             {/* Tags */}
-
             <div>
                 <label
                     className="
@@ -188,7 +203,7 @@ const UploadForm = ({
                         mb-3
                         text-sm
                         font-semibold
-                        text-black
+                        text-white/90
                     "
                 >
                     Tags
@@ -199,25 +214,29 @@ const UploadForm = ({
                     name="tags"
                     value={formData.tags}
                     onChange={handleChange}
-                    placeholder="ai, chatgpt, coding"
+                    placeholder="ai, chatgpt, coding (comma separated)"
                     className="
                         w-full
                         px-5
                         py-4
-                        bg-gray-50
+                        bg-black/50
                         border
-                        border-gray-200
-                        rounded-[16px]
-                        text-black
-                        placeholder:text-gray-400
+                        border-white/10
+                        rounded-2xl
+                        text-white
+                        placeholder:text-white/30
                         focus:outline-none
-                        focus:border-black
+                        focus:border-white/30
+                        focus:ring-1
+                        focus:ring-white/30
+                        focus:bg-white/[0.02]
+                        transition-all
+                        duration-200
                     "
                 />
             </div>
 
             {/* Cover Image */}
-
             <div>
                 <label
                     className="
@@ -225,60 +244,53 @@ const UploadForm = ({
                         mb-3
                         text-sm
                         font-semibold
-                        text-black
+                        text-white/90
                     "
                 >
                     Cover Image
                 </label>
 
                 <label
-                    className="
+                    className={`
                         flex
                         flex-col
                         items-center
                         justify-center
                         h-64
-                        bg-gray-50
                         border-2
                         border-dashed
-                        border-gray-300
                         rounded-[24px]
                         cursor-pointer
-                        hover:bg-gray-100
                         transition-all
-                    "
+                        duration-300
+                        ${image 
+                            ? "bg-white/[0.05] border-white/30" 
+                            : "bg-white/[0.01] border-white/10 hover:bg-white/[0.03] hover:border-white/20"
+                        }
+                    `}
                 >
-                    <span
-                        className="
-                            text-lg
-                            font-semibold
-                            text-black
-                        "
-                    >
-                        Upload Image
-                    </span>
-
-                    <span
-                        className="
-                            text-sm
-                            text-gray-500
-                            mt-2
-                        "
-                    >
-                        PNG, JPG, WEBP
-                    </span>
-
-                    {image && (
-                        <span
-                            className="
-                                mt-4
-                                text-sm
-                                text-black
-                                font-medium
-                            "
-                        >
-                            {image.name}
-                        </span>
+                    {image ? (
+                        <div className="flex flex-col items-center text-white">
+                            <CheckCircle2 size={40} className="text-green-400 mb-4" />
+                            <span className="text-lg font-semibold tracking-tight">
+                                Image Selected
+                            </span>
+                            <span className="text-sm text-white/50 mt-2 font-medium bg-black/50 px-3 py-1 rounded-lg">
+                                {image.name}
+                            </span>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center">
+                            <div className="p-4 rounded-full bg-white/[0.02] mb-4">
+                                <UploadCloud size={32} className="text-white/40" />
+                            </div>
+                            <span className="text-lg font-semibold text-white/90 tracking-tight">
+                                Click to Upload
+                            </span>
+                            <span className="text-sm text-white/40 mt-2">
+                                PNG, JPG, WEBP (Max 5MB)
+                            </span>
+                        </div>
                     )}
 
                     <input
@@ -286,38 +298,44 @@ const UploadForm = ({
                         accept="image/*"
                         required
                         className="hidden"
-                        onChange={(e) =>
-                            setImage(
-                                e.target.files[0]
-                            )
-                        }
+                        onChange={(e) => setImage(e.target.files[0])}
                     />
                 </label>
             </div>
 
             {/* Submit */}
-
             <button
                 type="submit"
                 disabled={loading}
                 className="
                     w-full
                     h-14
-                    bg-black
-                    text-white
-                    rounded-[16px]
-                    font-semibold
-                    hover:bg-gray-900
+                    bg-white
+                    text-black
+                    rounded-2xl
+                    font-bold
+                    text-lg
+                    hover:bg-white/90
+                    active:scale-[0.98]
                     transition-all
+                    duration-200
                     disabled:opacity-50
                     disabled:cursor-not-allowed
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
                 "
             >
-                {loading
-                    ? "Publishing..."
-                    : "Publish Prompt"}
+                {loading ? (
+                    "Publishing..."
+                ) : (
+                    <>
+                        <ImageIcon size={20} />
+                        Publish Prompt
+                    </>
+                )}
             </button>
-
         </form>
     );
 };

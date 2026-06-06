@@ -1,10 +1,10 @@
+import React from "react";
 import UploadCard from "../upload/UploadCard";
 import EmptyState from "../common/EmptyState";
 
 const ProfileUploads = ({
     uploads = []
 }) => {
-
     if (uploads.length === 0) {
         return (
             <EmptyState
@@ -15,20 +15,25 @@ const ProfileUploads = ({
     }
 
     return (
-        <div className="mt-8">
+        <div className="mt-12">
+            {/* Header */}
             <div
                 className="
                     flex
                     items-center
                     justify-between
-                    mb-6
+                    mb-8
+                    pb-4
+                    border-b
+                    border-white/10
                 "
             >
                 <h2
                     className="
                         text-2xl
                         font-bold
-                        text-[#0B0B0C]
+                        text-white
+                        tracking-tight
                     "
                 >
                     My Uploads
@@ -36,15 +41,22 @@ const ProfileUploads = ({
 
                 <span
                     className="
-                        text-[#2E2E31]
-                        opacity-70
+                        px-3
+                        py-1
+                        rounded-full
+                        bg-white/[0.05]
+                        border
+                        border-white/10
+                        text-white/60
+                        text-sm
                         font-medium
                     "
                 >
-                    {uploads.length} Posts
+                    {uploads.length} {uploads.length === 1 ? 'Post' : 'Posts'}
                 </span>
             </div>
 
+            {/* Grid */}
             <div
                 className="
                     grid
@@ -57,7 +69,7 @@ const ProfileUploads = ({
             >
                 {uploads.map((upload) => (
                     <UploadCard
-                        key={upload.id}
+                        key={upload.id || upload._id}
                         upload={upload}
                     />
                 ))}
